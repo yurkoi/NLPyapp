@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}
+create article page
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Create new article</h1>
+    <form method="post">
+        <input type="number" name="id" id="id" class="form-control" placeholder="id">
+        <input type="text" name="title" id="title" class="form-control" placeholder="title">
+        <textarea name="intro" id="intro" class="form-control" placeholder="intro of text"></textarea>
+        <textarea name="text" id="text" class="form-control" placeholder="main article"></textarea>
+        <input type="submit" class="btn btn-success" value="Sent">
+        <div>
+            <select name = "dropdown" >
+                <option value = "Computer Architecture" selected>Computer Architecture</option>
+                <option value = "Java">Java</option>
+                <option value = "Discrete Mathematics">Discrete Mathematics</option>
+            </select>
+             <select name = "dropdown" >
+                <option value = "Computer Architecture" selected>Computer Architecture</option>
+                <option value = "Java">Java</option>
+                <option value = "Discrete Mathematics">Discrete Mathematics</option>
+            </select>
+        </div>
+    </form>
+</div>
+{% endblock %}
+

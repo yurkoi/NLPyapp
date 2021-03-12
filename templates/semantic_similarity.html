@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}
+Sequence Similarity
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Sequence Similarity</h1>
+    <form method="post">
+        <textarea name="text_1" id="text_1" class="form-control" placeholder="Raw text" rows="3">{{ text_1 }}</textarea>
+        <textarea name="text_2" id="text_2" class="form-control" placeholder="Raw text" rows="3">{{ text_2 }}</textarea>
+        <input type="submit" class="btn btn-success" value="Compare">
+    </form>
+    <br>
+    <p><b>Cosine distance: {{ cosine_value }}</b></p>
+</div>
+{% endblock %}
+

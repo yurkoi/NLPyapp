@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}
+Analyze
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Analyzer</h1>
+    <form method="post">
+        <textarea name="text" id="text" class="form-control" placeholder="Raw text" rows="17">{{ rawtext }}</textarea>
+        <input type="submit" class="btn btn-success" value="Analyze!">
+    </form>
+    <p>Performance: {{ performance }}sec.</p>
+    <br>
+    <p><b>Stats: </b></p>
+    <p>Document length: {{ length_of_the_doc }}</p>
+    <p>Alpha: {{ alpha_perc }}%</p>
+    <p>Digit: {{ digit_perc }}%</p>
+    <p>Stop words: {{ stop_w_words }}%</p>
+    <p>Mean word shape: {{ mean_tok_shape }}</p>
+    <p>Median word shape: {{ med_tok_shape }}</p>
+    <p>Max word shape: {{ max_tok_shape }}</p>
+    <br>
+    <p><b>Parts of speech: </b></p>
+    {% for pos in poses %}
+    <p>{{ pos[0] }} : {{ pos[1] }}%</p>
+    {% endfor %}
+    <br>
+    <p><b>Dependencies: </b></p>
+    {% for dep in depp %}
+    <p>{{ dep[0] }} : {{ dep[1] }}%</p>
+    {% endfor %}
+    <br>
+    <p><b>Polarity[-1,1] / Subjectivity[0,1] : {{ polar_subj }} </b></p>
+    <br>
+    <p><b>NER (default): </b></p>
+    {% for nr_s in ner_stats %}
+    <p>{{ nr_s[0] }} : {{ nr_s[1] }}%</p>
+    {% endfor %}
+    <form action="get">
+        <textarea name="text" id="ner_result" class="form-control" placeholder="Raw text" rows="5">
+        {% for ent in ner_def %}
+            {{ ent[0] }} : {{ ent[1] }}
+        {% endfor %}
+        </textarea>
+    </form>
+</div>
+{% endblock %}
+

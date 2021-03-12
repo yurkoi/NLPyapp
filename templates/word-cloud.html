@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}
+    create word cloud
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>WordCloud</h1>
+    <form method="post">
+        <textarea name="text" id="text" class="form-control" placeholder="main article" rows="17"></textarea>
+        <input type="submit" class="btn btn-success" value="To cloud!">
+    </form>
+<!--    <img src="data:image/png;base64, {{ plot_url }}">-->
+</div>
+{% endblock %}
+

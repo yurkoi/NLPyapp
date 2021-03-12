@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}
+Sentence analyzer
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Sentence analyzer</h1>
+    <form method="post">
+        <textarea name="text" id="text" class="form-control" placeholder="Raw text" rows="17">{{ raw_text }}</textarea>
+        <input type="submit" class="btn btn-success" value="Analyze!">
+    </form>
+    <p><b>Performance: {{ final_time }}sec.</b></p>
+    <br>
+    <div>
+        <p><b>Describe method</b></p>
+          <p> "word_count" - number of words in text </p>
+          <p> "unique_word_count" - number of unique words in text </p>
+          <p>  "stop_word_count" - number of stop words in text </p>
+          <p>  "url_count" - number of urls in text </p>
+          <p> "mean_word_length" - average character count in words </p>
+          <p>  "char_count" - number of characters in text </p>
+          <p>  "punctuation_count" - number of punctuations in text </p>
+          <p>  "hashtag_count" - number of hashtags (#) in text </p>
+          <p>  "mention_count" - number of mentions (@) in text </p>
+        {% for table in tables %}
+        {{ table|safe }}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
