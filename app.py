@@ -1,10 +1,11 @@
 from pprint import pprint
 
-from flask import Flask, render_template, request, redirect, send_file, make_response
+from flask import Flask, render_template, request, redirect, send_file, make_response, jsonify, json
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from utils import img_fig, default_statistic, text_blob_polarity, ner_analyzer, \
     sentences_statistic, custom_ner, semantic_similarity
+import json
 import time
 from io import StringIO
 import csv
@@ -152,22 +153,33 @@ def custm_ner():
         result, raw_text_len, train_text_len = custom_ner(raw_text, pattern, pattern_name)
         global data
         data = result
-        print(data)
+
         return render_template('custom_ner.html', result=result, raw_len=raw_text_len,
                                train_len=train_text_len)
     else:
         return render_template('custom_ner.html', train_len=0)
 
 
-@app.route('/download', methods=['POST', 'GET'])
-def sent_csv():
-    si = StringIO()
-    cw = csv.writer(si)
-    cw.writerows(data)
-    output = make_response(si.getvalue())
-    output.headers["Content-Disposition"] = "attachment; filename=train_df.csv"
-    output.headers["Content-type"] = "text/csv"
-    return output
+@app.route('/download')
+def get_jsonner():
+    # data = make_summary()
+    response = app.response_class(
+        response=json.dumps(data),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
+
+
+# @app.route('/download', methods=['POST', 'GET'])
+# def sent_csv():
+#     si = StringIO()
+#     cw = csv.writer(si)
+#     cw.writerows(data)
+#     output = make_response(si.getvalue())
+#     output.headers["Content-Disposition"] = "attachment; filename=train_df.csv"
+#     output.headers["Content-type"] = "text/csv"
+#     return output
 
 
 if __name__ == "__main__":
